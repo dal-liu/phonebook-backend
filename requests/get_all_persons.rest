@@ -1,1 +1,1 @@
-GET http://localhost:3001/api/persons
+GET https://polished-moon-9390.fly.dev

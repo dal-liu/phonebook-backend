@@ -11,7 +11,7 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms :d
 app.use(cors())
 app.use(express.static('build'))
 
-let persons = [
+let people = [
   {
     "id": 1,
     "name": "Arto Hellas",
@@ -38,19 +38,19 @@ app.get('/', (request, response) => {
   response.send('<h1>Hello World!</h1>')
 })
 
-app.get('/api/persons', (request, response) => {
-  response.json(persons)
+app.get('/api/people', (request, response) => {
+  response.json(people)
 })
 
 app.get('/info', (request, response) => {
-  const count = persons.length
+  const count = people.length
   const time = new Date().toString()
   response.send(`<p>Phonebook has info for ${count} people</p><p>${time}</p>`)
 })
 
-app.get('/api/persons/:id', (request, response) => {
+app.get('/api/people/:id', (request, response) => {
   const id = Number(request.params.id)
-  const person = persons.find(person => person.id === id)
+  const person = people.find(person => person.id === id)
 
   if (person) {
     response.json(person)
@@ -59,9 +59,9 @@ app.get('/api/persons/:id', (request, response) => {
   }
 })
 
-app.delete('/api/persons/:id', (request, response) => {
+app.delete('/api/people/:id', (request, response) => {
   const id = Number(request.params.id)
-  persons = persons.filter(person => person.id !== id)
+  people = people.filter(person => person.id !== id)
 
   response.status(204).end()
 })
@@ -70,7 +70,7 @@ const generateId = () => {
   return Math.floor(Math.random() * 100)
 }
 
-app.post('/api/persons', (request, response) => {
+app.post('/api/people', (request, response) => {
   const body = request.body
 
   if (!body.name || !body.number) {
@@ -79,7 +79,7 @@ app.post('/api/persons', (request, response) => {
     })
   }
 
-  if (persons.some(person => person.name === body.name)) {
+  if (people.some(person => person.name === body.name)) {
     return response.status(400).json({
       error: 'name must be unique'
     })
@@ -91,7 +91,7 @@ app.post('/api/persons', (request, response) => {
     number: body.number,
   }
 
-  persons = persons.concat(person)
+  people = people.concat(person)
 
   response.json(person)
 })

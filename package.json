@@ -10,7 +10,8 @@
     "build:ui": "@powershell Remove-Item -Recurse -Force build && cd ../full-stack-open/part2/phonebook && npm run build && @powershell Copy-Item build -Recurse ../../../phonebook-backend",
     "deploy": "fly deploy",
     "deploy:full": "npm run build:ui && npm run deploy",
-    "logs:prod": "fly logs"
+    "logs:prod": "fly logs",
+    "lint": "eslint ."
   },
   "author": "Daniel Liu",
   "license": "MIT",
@@ -22,6 +23,7 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "eslint": "^8.41.0",
     "nodemon": "^2.0.22"
   }
 }
